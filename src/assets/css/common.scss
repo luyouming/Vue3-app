@@ -1,0 +1,181 @@
+// 定义主要的颜色
+$myColor: blue;
+
+// 定义基本的样式
+
+// ** 没有参数
+// 单行内容过长实现...
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+//上下左右居中
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 常规button
+@mixin normal-button() {
+  min-width: 256px;
+  min-height: 76px;
+  display: inline-block;
+  border-radius: 13px;
+  border: 1px solid #4a59db;
+  background: #f8f9fd;
+  font-size: 36px;
+  font-weight: normal;
+  color: #4958db;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+// 正方形
+@mixin square($w) {
+  width: $w;
+  height: $w;
+}
+
+// ** 带参数
+// 高和行高 一致
+@mixin text-height($h) {
+  height: $h;
+  line-height: $h;
+}
+
+// ** 带判断
+// 三角形 triangle
+@mixin triangle($direction, $size, $borderColor) {
+  content: "";
+  height: 0;
+  width: 0;
+  @if $direction == top {
+    border-bottom: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  } @else if $direction == right {
+    border-left: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  } @else if $direction == bottom {
+    border-top: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  } @else if $direction == left {
+    border-right: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  }
+}
+// 自定义光标
+// .cursor-blink {
+//   animation: blink 1s infinite steps(1, start);
+//   -webkit-animation: blink 1s infinite steps(1, start);
+//   -moz-animation: blink 1s infinite steps(1, start);
+//   width: 2px;
+//   height: 30px;
+//   display: inline-block;
+//   position: relative;
+//   top: 5px;
+//   left: -70px;
+//   display: none;
+// }
+// .cursor-blink-active {
+//   display: inline-block;
+//   left: 0;
+// }
+
+.cursor-blink::after {
+  content: "";
+  animation: blink 1s infinite steps(1, start);
+  -webkit-animation: blink 1s infinite steps(1, start);
+  -moz-animation: blink 1s infinite steps(1, start);
+  width: 2px;
+  height: 30px;
+  display: block;
+  position: absolute;
+  top: 36px;
+  // left: -70px;
+  right: -5px;
+}
+@keyframes blink {
+  0%,
+  100% {
+    background-color: #000;
+    color: #aaa;
+  }
+  50% {
+    background-color: #bbb; /* not #aaa because it's seem there is Google Chrome bug */
+    color: #000;
+  }
+}
+
+// 表格样式
+.table-v {
+  .table-btn {
+    min-height: 0;
+    font-size: 26px;
+    width: 117px;
+    height: 52px;
+    text-align: center;
+    padding: 0;
+    line-height: 52px;
+    margin-left: 0;
+  }
+  ::v-deep(.el-table) {
+    .header-row {
+      color: #bbbbbb;
+      font-size: 24px;
+    }
+    .el-input__inner {
+      background-color: transparent;
+      border: none;
+      font-size: 26px;
+      color: #333333;
+      padding: 0px 9px;
+      text-align: center;
+      left: 0;
+      height: 100%;
+    }
+    .active {
+      background: rgba(98, 203, 167, 0.08) !important;
+      border: 2px solid #62cba7 !important;
+      border: 2px solid #62cba7 !important ;
+    }
+  }
+}
+/*
+vConsole
+*/
+#__vconsole .vc-toolbar .vc-tool{
+    height: 50px;
+    line-height: 52px;
+}
+
+#__vconsole .vc-logbox .vc-cmd{
+    display: none!important;
+}
+
+#__vconsole .vc-logbox .vc-item .vc-fold{
+    padding: 10px 0;
+}
+
+.container-overflow{
+    height: 100%;
+    overflow: hidden!important;
+}
+
+.container {
+    padding: 30px;
+}
+
+.van-tabbar {
+    padding: 5px 0;
+
+    .van-tabbar-item__text {
+        font-size: 20px;
+    }
+}
