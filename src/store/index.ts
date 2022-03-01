@@ -1,33 +1,8 @@
-import { createStore } from "vuex";
-export default createStore({
-  state: {
-    // listData: { name: 'famous' },
-    // num: 10,
-    role: "",
-    LOADING: false,
-  },
-  mutations: {
-    // SETDATA(state, value) {
-    //   state.listData = value
-    // },
-    // ADDNUM(state, value) {
-    //   state.num = state.num + value
-    // },
-    showLoading(state) {
-      state.LOADING = true;
-    },
-    hideLoading(state) {
-      state.LOADING = false;
-    },
+import Vuex from "vuex";
+import global from "./modules/global";
 
-    SETROLE(state, value) {
-      state.role = value;
-    },
+export default new Vuex.Store({
+  modules: {
+    global,
   },
-  actions: {
-    setRole(context, value) {
-      context.commit("SETROLE", value);
-    },
-  },
-  modules: {},
 });

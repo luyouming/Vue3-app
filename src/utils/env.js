@@ -1,12 +1,12 @@
 // cookie
 import * as cookie from "tcfe-helper/util/cookie";
-import * as dateFn from "tcfe-helper/util/date";
 import * as ls from "tcfe-helper/util/storage";
 
 // 配置信息
 // import { platId, userKey, isTest } from "./config"
 // wxmp 渠道
-const isTest = window.location.pathname.indexOf("hsrtfronttest") > -1;
+// console.log(window.location.pathname);
+// const isTest = window.location.pathname.indexOf("hsrtfronttest") > -1;
 const platId = 501;
 // cookie的位置
 const userKey = "WxUser";
@@ -40,9 +40,13 @@ let isAndroid = false;
 if (ug.indexOf("Android") > -1 || ug.indexOf("Linux") > -1) {
   isAndroid = true;
 }
-const CURRENT_ENV = process.env.VUE_APP_ENV;
-const CURRENT_CHANNEL = process.env.VUE_APP_CHANNEL;
-let isDev = CURRENT_ENV == "development";
+const CURRENT_ENV = import.meta.env.MODE;
+const CURRENT_CHANNEL = import.meta.env.VITE_APP_CHANNEL;
+// console.log(import.meta.env);
+const isDev = CURRENT_ENV == "development";
+const isTest = CURRENT_ENV == "test";
+const isPro = CURRENT_ENV == "production";
+
 let isWxmp = CURRENT_CHANNEL == "wxmp";
 let isTravel = CURRENT_CHANNEL == "travel";
 
@@ -76,15 +80,16 @@ let isTravel = CURRENT_CHANNEL == "travel";
 if (isDev) {
   window.uuid = "28739d2a-ed91-44fe-a46e-55a51a18ddd7";
 }
-
 const uuid = window.uuid || "";
+
 let env = {
   // 开发版本
   isDev,
   isTest,
-  isTouch: CURRENT_CHANNEL == "touch",
-  isWxmp,
-  isTravel,
+  isPro,
+  // isTouch: CURRENT_CHANNEL == "touch",
+  // isWxmp,
+  // isTravel,
   // 是否为ios
   isIOS,
   vIOS,
@@ -95,38 +100,38 @@ let env = {
 };
 
 // 学生票判断
-let stuSeatText = "/硬座/硬卧/二等座/无座";
-let stuDateMonth = "/6/7/8/9/12/1/2/3";
-// if ((isTest || isDev) && window.location.search == "?stu") {
-//     // 测试环境，当月不算学生购票月
-//     stuDateMonth = "/6/8/9/12/1/2/3";
-// }
-env.stuCanBuyMonth = stuDateMonth;
-env.isInStudent = function (date, seat) {
-  date = date ? [].concat(date) : [];
-  seat = seat ? [].concat(seat) : [];
-  let flg = true;
-  if (date.length) {
-    for (let item of date) {
-      let m = dateFn.create(item);
-      // 从今天开始算往后45天，如果配置日期在45天范围内则走正常逻辑
-      m = m.getMonth() + 1;
-      flg = stuDateMonth.indexOf(m) > 0;
-      if (!flg) {
-        break;
-      }
-    }
-  }
-  if (flg && seat.length) {
-    for (let item of seat) {
-      flg = stuSeatText.indexOf(item) > 0;
-      if (!flg) {
-        break;
-      }
-    }
-  }
-  return flg;
-};
+// let stuSeatText = "/硬座/硬卧/二等座/无座";
+// let stuDateMonth = "/6/7/8/9/12/1/2/3";
+// // if ((isTest || isDev) && window.location.search == "?stu") {
+// //     // 测试环境，当月不算学生购票月
+// //     stuDateMonth = "/6/8/9/12/1/2/3";
+// // }
+// env.stuCanBuyMonth = stuDateMonth;
+// env.isInStudent = function (date, seat) {
+//   date = date ? [].concat(date) : [];
+//   seat = seat ? [].concat(seat) : [];
+//   let flg = true;
+//   if (date.length) {
+//     for (let item of date) {
+//       let m = dateFn.create(item);
+//       // 从今天开始算往后45天，如果配置日期在45天范围内则走正常逻辑
+//       m = m.getMonth() + 1;
+//       flg = stuDateMonth.indexOf(m) > 0;
+//       if (!flg) {
+//         break;
+//       }
+//     }
+//   }
+//   if (flg && seat.length) {
+//     for (let item of seat) {
+//       flg = stuSeatText.indexOf(item) > 0;
+//       if (!flg) {
+//         break;
+//       }
+//     }
+//   }
+//   return flg;
+// };
 
 // 获取userid
 function getUserid() {

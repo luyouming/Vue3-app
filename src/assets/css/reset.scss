@@ -88,13 +88,20 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-// 防止第三方组件库字体图标显示异常
+// 防止第三方组件库vant3 字体图标显示异常
 i {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
+}
+.van-cell {
+  padding: 24px 24px 24px 24px;
+}
+.van-cell__title,
+.van-cell__value {
+  padding-top: 2px;
 }
 /* HTML5 display-role reset for older browsers */
 article,

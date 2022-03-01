@@ -27,10 +27,9 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue";
-// import { useRouter } from "vue-router";
+import { ref, defineComponent } from 'vue'
 export default defineComponent({
-  name: "KeyBoard",
+  name: 'KeyBoard',
   props: {
     keyList: {
       default: () => [
@@ -44,17 +43,17 @@ export default defineComponent({
         7,
         8,
         9,
-        ".",
-        "A",
-        "B",
-        "C",
-        "D",
-        "F",
-        "加",
-        "上铺",
-        "中铺",
-        "下铺",
-        "X",
+        '.',
+        'A',
+        'B',
+        'C',
+        'D',
+        'F',
+        '加',
+        '上铺',
+        '中铺',
+        '下铺',
+        'X',
         // "清空",
       ],
       type: Array,
@@ -65,27 +64,27 @@ export default defineComponent({
     },
   },
   setup: (props, context) => {
-    let visible = ref<boolean>(false);
+    let visible = ref<boolean>(false)
     //初始化路由
     // const router = useRouter();
 
     const change = (item: any) => {
       let operateString =
-        item === "X" ? "delete" : item === "清空" ? "clear" : "change";
-      context.emit(operateString, item);
-    };
+        item === 'X' ? 'delete' : item === '清空' ? 'clear' : 'change'
+      context.emit(operateString, item)
+    }
 
     const show = () => {
-      visible.value = true;
-    };
+      visible.value = true
+    }
     const hide = () => {
-      visible.value = false;
-      context.emit("close", "X");
-    };
+      visible.value = false
+      context.emit('close', 'X')
+    }
 
-    return { visible, change, show, hide };
+    return { visible, change, show, hide }
   },
-});
+})
 </script>
 
 <style lang="scss" scoped>
@@ -147,7 +146,7 @@ export default defineComponent({
     border: none;
     border-radius: 0;
     box-shadow: none;
-    background: url("https://file.40017.cn/trainwechat/miniapp/hsrtfront/pz_deleteBtn.png")
+    background: url('https://file.40017.cn/trainwechat/miniapp/hsrtfront/pz_deleteBtn.png')
       no-repeat center;
     background-size: cover;
     padding-right: 12px;

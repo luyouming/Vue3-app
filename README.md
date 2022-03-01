@@ -22,6 +22,7 @@ vite + vant3 + vue3 + rem 布局
 10. 配置了 `tive-cli` 自动化执行 shell 脚本功能。提示： `tive-cli` 需要使用 `npm i -g tive-cli` 全局安装。
 11. 自动化打包和 zip 压缩。
 12. 提供了 `WebAssembly`（`Wasm`）使用案例，以及对应的交互展示页面。
+13. vite 打包预览要用 ip 服务器部署访问，不能用文件协议预览，建议用 live server
 
 ## 项目展示
 
@@ -32,9 +33,12 @@ vite + vant3 + vue3 + rem 布局
 ## npm 命令
 
 ```shell
-# 开启项目
+# 新开启项目
 cnpm i -g tive-cli
 tive create vue3-demo
+
+# 开启这个项目
+cnpm i
 
 # 启动本地服务
 npm start
@@ -50,6 +54,12 @@ npm run build
 
 # 测试打包
 npm run build:dev
+
+# 预发打包
+npm run build:stage
+
+# 预览正式环境
+npm run preview
 
 # 生产打包并压缩
 npm run zip

@@ -11,11 +11,28 @@ $myColor: blue;
   overflow: hidden;
 }
 
+// 多行省略超出范围
+@mixin ellipsis-more($lineNum: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $lineNum;
+  -webkit-box-orient: vertical;
+}
+
 //上下左右居中
 @mixin flex-center() {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+// flex居中，竖排或横排
+@mixin flex-layout($direction: row, $justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
 }
 
 // 常规button
@@ -37,6 +54,7 @@ $myColor: blue;
 @mixin square($w) {
   width: $w;
   height: $w;
+  text-align: center;
 }
 
 // ** 带参数
@@ -44,6 +62,87 @@ $myColor: blue;
 @mixin text-height($h) {
   height: $h;
   line-height: $h;
+}
+
+// 横向滚动盒子,靠左对齐
+@mixin horizontal-scroll($width: 100%) {
+  @include flex-layout(row, flex-start, center);
+  overflow: scroll;
+  overflow-y: hidden;
+  width: $width;
+}
+
+// 竖向滚动盒子,靠上对齐
+@mixin vertical-scroll($height: 100%) {
+  @include flex-layout(column, flex-start, center);
+  overflow: scroll;
+  overflow-x: hidden;
+  height: $height;
+}
+
+//线性渐变
+@mixin linear-y(
+  $start-color,
+  $end-color,
+  $start-percent: 0%,
+  $end-percent: 100%
+) {
+  // background-color: $start-color;
+  background-image: -webkit-gradient(
+    linear,
+    $start-percent top,
+    $end-percent bottom,
+    from($start-color),
+    to($end-color)
+  ); // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(
+    top,
+    color-stop($start-color $start-percent),
+    color-stop($end-color $end-percent)
+  ); // Safari 5.1+, Chrome 10+
+  background-image: -moz-linear-gradient(
+    top,
+    $start-color $start-percent,
+    $end-color $end-percent
+  ); // FF 3.6+
+  background-image: linear-gradient(
+    to bottom,
+    $start-color $start-percent,
+    $end-color $end-percent
+  ); // Standard, IE10
+  background-repeat: no-repeat;
+}
+
+@mixin linear-x(
+  $start-color,
+  $end-color,
+  $start-percent: 0%,
+  $end-percent: 100%
+) {
+  // background-color: $start-color;
+  background-image: -webkit-gradient(
+    linear,
+    $start-percent left,
+    $end-percent bottom,
+    from($start-color),
+    to($end-color)
+  ); // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(
+    left,
+    color-stop($start-color $start-percent),
+    color-stop($end-color $end-percent)
+  ); // Safari 5.1+, Chrome 10+
+  background-image: -moz-linear-gradient(
+    left,
+    $start-color $start-percent,
+    $end-color $end-percent
+  ); // FF 3.6+
+  background-image: linear-gradient(
+    to right,
+    $start-color $start-percent,
+    $end-color $end-percent
+  ); // Standard, IE10
+  background-repeat: no-repeat;
 }
 
 // ** 带判断
@@ -150,32 +249,32 @@ $myColor: blue;
 /*
 vConsole
 */
-#__vconsole .vc-toolbar .vc-tool{
-    height: 50px;
-    line-height: 52px;
+#__vconsole .vc-toolbar .vc-tool {
+  height: 50px;
+  line-height: 52px;
 }
 
-#__vconsole .vc-logbox .vc-cmd{
-    display: none!important;
+#__vconsole .vc-logbox .vc-cmd {
+  display: none !important;
 }
 
-#__vconsole .vc-logbox .vc-item .vc-fold{
-    padding: 10px 0;
+#__vconsole .vc-logbox .vc-item .vc-fold {
+  padding: 10px 0;
 }
 
-.container-overflow{
-    height: 100%;
-    overflow: hidden!important;
+.container-overflow {
+  height: 100%;
+  overflow: hidden !important;
 }
 
 .container {
-    padding: 30px;
+  padding: 30px;
 }
 
 .van-tabbar {
-    padding: 5px 0;
+  padding: 5px 0;
 
-    .van-tabbar-item__text {
-        font-size: 20px;
-    }
+  .van-tabbar-item__text {
+    font-size: 20px;
+  }
 }
