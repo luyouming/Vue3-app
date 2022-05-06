@@ -166,7 +166,7 @@ import bottomLine from '@components/BottomLine/index.vue'
 import { mockData } from './mock/index'
 import { useRouter, onBeforeRouteLeave } from 'vue-router'
 import { useStore } from 'vuex'
-import { topTabBarFixed } from '@mixin'
+import { topTabBarFixed } from '@mixin/index
 
 import * as storage from 'tcfe-helper/util/storage'
 // import layerMask from "../../components/LayerMask/index.vue";
